@@ -8,7 +8,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.testng.Assert;
 
-public class VerifyChildrenSD extends BasePage {
+public class VerifyChildrenSD {
     LandingPage landingPage=new LandingPage();
 
 

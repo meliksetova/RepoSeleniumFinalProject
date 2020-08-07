@@ -26,7 +26,7 @@ public class LandingPage extends BasePage {
        }
        hours2.removeAll(Arrays.asList("", null));
        if (size == (hours2.size()+1)) {
-           ArrayList<String> hours3 = DateHelper.createArrayFromXTimeFromNow(interval, size);
+           ArrayList<String> hours3 = DateHelper.createArrayFromXTimeFromNow(interval, size-1);
            verify = Helper.compareTwoArrays(hours2, hours3);
        } else verify=false;
        return verify;

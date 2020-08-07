@@ -74,8 +74,8 @@ public class BasePage {
     }
 
     public void selectFromDropdownByVisibleText(By locator, String visibleText) {
-        WebElement dropdownElement = findElementUsingFluentWait(locator);
-        Select dropdown = new Select(dropdownElement);
+        Select dropdown=new Select(findElementUsingFluentWait(locator));
+        sleep(2000);
         dropdown.selectByVisibleText(visibleText);
     }
 

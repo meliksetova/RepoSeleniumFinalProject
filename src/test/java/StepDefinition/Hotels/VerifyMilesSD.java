@@ -8,8 +8,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.testng.Assert;
 
-public class VerifyMilesSD extends BasePage {
-    LandingPage landingPage=new LandingPage();
+public class VerifyMilesSD {
     SearchResultPage searchResultPage=new SearchResultPage();
 
     @When("^I select LGA airport$")

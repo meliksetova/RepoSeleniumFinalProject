@@ -9,7 +9,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.testng.Assert;
 
-public class VerifyRatingSD extends BasePage {
+public class VerifyRatingSD {
     LandingPage landingPage=new LandingPage();
     SearchResultPage searchResultPage=new SearchResultPage();
 

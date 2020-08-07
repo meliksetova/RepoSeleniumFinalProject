@@ -8,7 +8,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.testng.Assert;
 
-public class TodayTimelineSD extends BasePage {
+public class TodayTimelineSD {
     LandingPage landingPage= new LandingPage();
 
     @Given("^I am on Darksky home page$")
