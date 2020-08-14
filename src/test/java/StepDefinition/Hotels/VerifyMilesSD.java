@@ -11,21 +11,20 @@ import org.testng.Assert;
 public class VerifyMilesSD {
     SearchResultPage searchResultPage=new SearchResultPage();
 
-    @When("^I select LGA airport$")
-    public void selectDist(){
-        searchResultPage.selectLGA();
+    @When("^I select (.*) from distance$")
+    public void selectDist(String distance){
+        searchResultPage.selectDistance(distance);
     }
 
-    @And("^I click on pool$")
-    public void selectFilter(){
-        searchResultPage.selectPool();
+    @And("^I click on (.*) from Popular filters$")
+    public void selectFilter(String filter){
+        searchResultPage.selectFilter(filter);
     }
 
-    @Then("^I verify system displays all hotels within 20 miles radius of airport$")
-
-    public void verifyMiles(){
+    @Then("^I verify system displays all hotels within '(.*)' miles radius of airport$")
+    public void verifyMiles(int miles){
         searchResultPage.VerifySearchIsDone();
-        Assert.assertTrue(searchResultPage.verifyMiles());
+        Assert.assertTrue(searchResultPage.verifyMiles(miles));
     }
 
     @Then(("^I verify '(.*)' Hotel is within radius$"))

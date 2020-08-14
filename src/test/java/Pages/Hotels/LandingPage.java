@@ -15,7 +15,8 @@ public class LandingPage extends BasePage {
     By dropdownsLocator=By.xpath("//select[contains(@id,'qf-0q-room-0-child-')]");
 
     public void closePopUp() {
-        clickThis(continueLocator);
+        if (findElementsUsingFluentWait(continueLocator).size()!=0){
+            clickThis(continueLocator);}
     }
 
     public void enterDestination(String destination) {

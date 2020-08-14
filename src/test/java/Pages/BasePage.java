@@ -75,7 +75,7 @@ public class BasePage {
 
     public void selectFromDropdownByVisibleText(By locator, String visibleText) {
         Select dropdown=new Select(findElementUsingFluentWait(locator));
-        sleep(2000);
+        sleep(4000);
         dropdown.selectByVisibleText(visibleText);
     }
 
@@ -225,12 +225,7 @@ public class BasePage {
         return ele;
     }
 
-
-
-
-
-
-    public List<WebElement> findElementsUsingFluentWait(final By locator) {
+ public List<WebElement> findElementsUsingFluentWait(final By locator) {
         Wait fWait = new FluentWait<>(Web.getDriver())
                 .withTimeout(Duration.ofSeconds(25))
                 .pollingEvery(Duration.ofSeconds(1))
@@ -239,10 +234,7 @@ public class BasePage {
                 .ignoring(ElementNotInteractableException.class)
                 .withMessage("Elements are not found within 25 seconds");
 
-
-
-
-        List<WebElement> ele = (List<WebElement>) fWait.until(new Function<WebDriver, List<WebElement>>() {
+    List<WebElement> ele = (List<WebElement>) fWait.until(new Function<WebDriver, List<WebElement>>() {
             public List<WebElement> apply(WebDriver driver) {
                 return driver.findElements(locator);
 
@@ -277,6 +269,17 @@ public class BasePage {
         for(WebElement element:elements){
             texts.add(element.getText());
         } return texts;
+    }
+
+    public void dropdownWithClicks(By dropdown,By locator,String text ){
+        clickThis(dropdown);
+        List<WebElement> elements=findElementsUsingFluentWait(locator);
+        for (WebElement element:elements){
+            if(getTextFromElement(element).equalsIgnoreCase(text)){
+                clickThis(element);
+                break;
+            }
+        }
     }
 
 }

@@ -10,39 +10,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchResultPage extends BasePage {
-    By fiveStarSelection=By.xpath("//input[@id='f-star-rating-5']");
-    By fourStarSelection=By.xpath("//input[@id='f-star-rating-4']");
-    By threeStarSelection=By.xpath("//input[@id='f-star-rating-3']");
-    By twoStarSelection=By.xpath("//input[@id='f-star-rating-2']");
-    By oneStarSelection=By.xpath("//input[@id='f-star-rating-1']");
+    By starsLocator=By.xpath("//label[contains(@id,'f-label-star-rating')]");
     By ratingLocator=By.xpath("//span[contains(@class,'star-rating-text')]");
     By messageLocator=By.xpath("//div[@class='info unavailable-info']");
     By distanceLocator=By.xpath("//a[@data-menu='sort-submenu-distance']");
-    By LGALocator=By.xpath("//a[contains(text(),'LaGuardia Airport (LGA)')]");
+    By distanceOptLocator=By.xpath("//a[@data-option-id='opt_DISTANCE_FROM_LANDMARK_ID']");
+    By popFilterLocator=By.xpath("//label[contains(@for,'f-popular')]");
     By poolLocator=By.xpath("//label[@id='f-label-popular-128']");
     By messageDistLocator= By.xpath("//ul[@class='property-landmarks']//child::li[contains(text(),'LGA')]");
     By hotelNameLocator=By.xpath("//a[@class='property-name-link']");
 
+
     public void selectStars(String star){
         sleep(2000);
-        switch (star){
-            case "5":
-                clickThis(fiveStarSelection);
+        List<WebElement> stars=findElementsUsingFluentWait(starsLocator);
+        for (WebElement starTest:stars){
+            if(starTest.getText().startsWith(star)){
+                clickThis(starTest);
                 break;
-            case "4":
-                clickThis(fourStarSelection);
-                break;
-            case "3":
-                clickThis(threeStarSelection);
-                break;
-            case "2":
-                clickThis(twoStarSelection);
-                break;
-            case "1":
-                clickThis(oneStarSelection);
-                break;
-            default:
-                System.out.println("Wrong Input");
+            }
         }
     }
 
@@ -69,42 +55,58 @@ public class SearchResultPage extends BasePage {
     }
 
 
-    public void selectLGA(){
+    public void selectDistance(String distance){
         clickThis(distanceLocator);
         sleep(2000);
-        clickThis(LGALocator);
-    }
-
-    public void selectPool(){
-        clickThis(poolLocator);
-    }
-
-
-    public boolean verifyMiles(){
-        sleep(4000);
-        ArrayList<String> distances=getTextsFromWebElements(messageDistLocator);
-        boolean miles=true;
-        for (String distance:distances){
-            double number=Double.valueOf(distance.substring(0,distance.indexOf(" ")));
-            if (number>20){
-                miles=false;
+        List<WebElement> distOpt=findElementsUsingFluentWait(distanceOptLocator);
+        for (WebElement dist:distOpt){
+            if(dist.getText().contains(distance)){
+                clickThis(dist);
+                sleep(2000);
                 break;
-            }
-            } return miles;
-        }
 
-    public boolean verifyName(String name){
-        sleep(4000);
-        ArrayList<String> names= getTextsFromWebElements(hotelNameLocator);
-        boolean message=false;
-        for (String name2:names){
-            if (!name2.contains(name)){
-                message=true;
+            }
+        }
+    }
+
+    public void selectFilter(String filter){
+        sleep(2000);
+        List<WebElement> filters=findElementsUsingFluentWait(popFilterLocator);
+        for (WebElement filter2:filters){
+            if(filter2.getText().equalsIgnoreCase(filter) || filter2.getText().contains(filter)){
+                clickThis(filter2);
+                sleep(2000);
                 break;
             }
         }
-        return message;
     }
+
+    public boolean verifyMiles(int mile) {
+        sleep(4000);
+        ArrayList<String> distances = getTextsFromWebElements(messageDistLocator);
+        boolean miles = true;
+        for (String distance : distances) {
+            double number = Double.valueOf(distance.substring(0, distance.indexOf(" ")));
+            if (number > mile) {
+                miles = false;
+                break;
+            }
+        }
+        return miles;
+    }
+
+    public boolean verifyName (String name){
+            sleep(4000);
+            ArrayList<String> names = getTextsFromWebElements(hotelNameLocator);
+            boolean message = false;
+            for (String name2 : names) {
+                if (!name2.contains(name)) {
+                    message = true;
+                    break;
+                }
+            }
+            return message;
+        }
 
     }
 

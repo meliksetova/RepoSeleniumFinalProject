@@ -15,7 +15,7 @@ public class VerifyChildrenSD {
     @Given("^I am on hotels landing page$")
     public void launchHotels() {
         Web.initDriver("https://www.hotels.com/");
-        //landingPage.closePopUp();
+        landingPage.closePopUp();
     }
 
     @When("^I select '(.*)' in children dropdown$")

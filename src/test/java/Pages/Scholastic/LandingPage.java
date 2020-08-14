@@ -77,9 +77,7 @@ public class LandingPage extends BasePage {
         type(RolePreK,"10");
         clickThis(roleClassesNext);
         clickThis(AlmostThereSelectType);
-        sleep(2000);
         clickThis(AlmostThereNA);
-        sleep(2000);
         clickThis(YesButton);
         clickThis(BookClub);
 }
@@ -90,9 +88,7 @@ public class LandingPage extends BasePage {
         }
 
         public void login(){
-        sleep(2000);
         clickThis(signInLocator);
-        sleep(2000);
         type(emailSighInLocator,"test65@gmail.com");
         type(passwordSighInLocator,"asdfg12345");
         clickThis(signInButton);

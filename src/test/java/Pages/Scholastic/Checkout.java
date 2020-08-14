@@ -11,6 +11,9 @@ public class Checkout extends BasePage {
     By continueCheckoutBilling=By.id("billingContinueButton");
     By submitOrder=By.xpath("//div[@class='row enter-order-info']//div[@class='order-summary-footer']//div[@class='form-row']//button[@type='submit']");
     By message=By.xpath("//div[@class='col order-instruction']//child::h2");
+    By creditCardPayment=By.xpath("//li[@class='custom-option CREDIT_CARD']//span[contains(text(),'Credit Card')]");
+    By creditCards=By.xpath("//div[@id='sec-cc-select']//div[@class='form-row']//following-sibling::div[@class='custom-select credit']");
+    By creditCardNumbers=By.xpath("//span[@class='cc-checkout']");
 
     public void submitCheckout(){
         clickThis(continueCheckout);
@@ -27,6 +30,24 @@ public class Checkout extends BasePage {
         boolean text=getTextFromElement(findElementUsingFluentWait(message)).contains("Thank You for Your Order");
         return text;
     }
+
+    public boolean verifyCardInAccount(String cardNumber){
+        clickThis(continueCheckout);
+        clickThis(selectPaymentOption);
+        sleep(2000);
+        clickThis(creditCardPayment);
+        sleep(2000);
+        clickThis(creditCards);
+        boolean cardIn=false;
+        for (String cardNumb:getTextsFromWebElements(creditCardNumbers)){
+            if (cardNumb.endsWith(cardNumber)){
+                cardIn=true;
+                break;
+            }
+        }
+        return cardIn;
+    }
+
 
 
 }
